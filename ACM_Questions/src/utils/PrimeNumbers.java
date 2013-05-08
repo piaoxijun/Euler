@@ -1,0 +1,69 @@
+package utils;
+
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * this version is not the concurrent one;
+ * @author jimmy
+ *
+ */
+public class PrimeNumbers {
+	private static List<Long> One;
+	private static List<Long> primeNumberListExceptOne;
+	
+	private static long calNumber=1000000;
+	static{
+		One = new LinkedList<Long>();
+		One.add(1l);
+		primeNumberListExceptOne = new LinkedList<Long>();
+		primeNumberListExceptOne.add(2l);
+		addPrimeNumbers(3,calNumber);
+	}
+	
+	/**
+	 * 
+	 * @param toNumber it is exclude
+	 * @return
+	 */
+	public static  List<Long> getPrimeNumberListExceptOne(long toNumber){
+		if(toNumber>calNumber){
+			addPrimeNumbers(calNumber,toNumber);
+			calNumber = toNumber;
+		}
+		return primeNumberListExceptOne;
+	}
+	
+	public static  List<Long> getPrimeNumberListExceptOne(){
+		return primeNumberListExceptOne;
+	}
+	
+	
+	private static void addPrimeNumbers(long fromNumber,long toNumber){
+		long midNumber = (long)Math.sqrt(toNumber)+1;
+		boolean tempBoolean = true;
+		for(long i=fromNumber;i<toNumber;i++){
+			tempBoolean = true;
+			for(long tempPrime:primeNumberListExceptOne){
+				if(i%tempPrime==0){
+					tempBoolean = false;
+					break;
+				}
+				if(tempPrime>midNumber){
+					break;
+				}
+			}
+			if(tempBoolean){
+				primeNumberListExceptOne.add(i);
+			}
+		}
+	}
+	
+	public static void  main(String args[]){
+		
+		List<Long> result = getPrimeNumberListExceptOne(200);
+		for(long temp:result){
+			System.out.println(temp);
+		}
+	}
+}

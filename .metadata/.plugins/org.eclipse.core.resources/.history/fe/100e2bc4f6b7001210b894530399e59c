@@ -1,0 +1,33 @@
+package utils;
+
+public class FractionNumber {
+	private long denominator;
+	private long numerator;
+	
+	
+	public FractionNumber(long denominator,long numerator) throws Exception{
+		setDenominator(denominator);
+		setNumerator(numerator);
+	}
+	
+	
+	
+	
+	public long getDenominator() {
+		return denominator;
+	}
+	public void setDenominator(long denominator) throws Exception {
+		if(denominator==0)
+			throw new  Exception("The denominator of the fraction cannot be zero!");
+		this.denominator = denominator;
+	}
+	public long getNumerator() {
+		return numerator;
+	}
+	public void setNumerator(long numerator) {
+		this.numerator = numerator;
+	}
+	
+	
+	
+}

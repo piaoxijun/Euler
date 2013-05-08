@@ -1,0 +1,30 @@
+package utils;
+
+public class FractionNumber {
+	private long denominator;
+	private long numerator;
+	
+	
+	
+	
+	
+	
+	
+	public long getDenominator() {
+		return denominator;
+	}
+	public void setDenominator(long denominator) {
+		if(denominator==0)
+			throw new  Exception();
+		this.denominator = denominator;
+	}
+	public long getNumerator() {
+		return numerator;
+	}
+	public void setNumerator(long numerator) {
+		this.numerator = numerator;
+	}
+	
+	
+	
+}

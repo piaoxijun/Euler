@@ -1,0 +1,141 @@
+package utils;
+
+public class Fraction  implements Comparable<Fraction>{
+	
+	private long denominator;
+	private long numerator;
+	
+	
+	public Fraction(long denominator,long numerator) throws ArithmeticException{
+		setDenominator(denominator);
+		setNumerator(numerator);
+		reduct();
+	}
+
+
+    // 利用对应小数值是否相同来判断分数是否相同  
+    public boolean equals(Fraction f) {  
+        if (numerator == f.numerator && denominator == f.denominator)  
+            return true;  
+        else  
+            return false;  
+    }  
+  
+    // 利用对应小数值的大小来判断分数的大小  
+    public boolean isGreater(Fraction f) {  
+        if ((double) numerator / denominator > (double) f.numerator  
+                / f.denominator)  
+            return true;  
+        else  
+            return false;  
+    }  
+  
+    // 约分函数  
+    private void reduct() {  
+        // 求分子和分母的最小值  
+        long minValue = Math.min(Math.abs(numerator), Math.abs(denominator));  
+          
+        // 将小于分子和分母的最小值的数值，从大到小去除分子和分母，如果能够同时被整除，则以此数值约分并退出  
+        for (long i = minValue; i >= 1; i--) {  
+            if (numerator % i == 0 && denominator % i == 0) {  
+                numerator = numerator / i;  
+                denominator = denominator / i;  
+                break;  
+            }  
+        }  
+    }  
+  
+    // 返回分数相加的结果，并且约分  
+    public Fraction add(Fraction f) {  
+         
+        long fractionNumerator = numerator * f.denominator + f.numerator  
+                * denominator;  
+        long fractionDenominator = denominator * f.denominator;  
+ 
+        return new Fraction(fractionNumerator,fractionDenominator);  
+    }  
+  
+    // 返回分数相减的结果，并且约分  
+    public Fraction minus(Fraction f) {  
+        long fractionNumerator = numerator * f.denominator - f.numerator  
+                * denominator;  
+        long fractionDenominator = denominator * f.denominator;  
+        return new Fraction(fractionNumerator,fractionDenominator);   
+    }  
+  
+    // 返回分数相乘的结果，并且约分  
+    public Fraction multiply(Fraction f) {  
+        long fractionNumerator = numerator * f.numerator;  
+        long fractionDenominator = denominator * f.denominator;  
+        return new Fraction(fractionNumerator,fractionDenominator);  
+    }  
+  
+    // 返回分数相除的结果，并且约分  
+    public Fraction divide(Fraction f) {  
+        long fractionNumerator = numerator * f.denominator;  
+        long fractionDenominator = denominator * f.numerator;  
+        return new Fraction(fractionNumerator,fractionDenominator);    
+    }  
+  
+    // 支持两个分数类变量的比较，以实现分数集合的查找功能  
+    public int compareTo(Fraction o) {  
+        Fraction f = (Fraction) o;  
+          
+        // 利用对应小数的大小来比较分数的大小  
+        if ((double) numerator / denominator > (double) f.numerator  
+                / f.denominator)  
+            return 1;  
+        else if ((double) numerator / denominator < (double) f.numerator  
+                / f.denominator)  
+            return -1;  
+        else  
+            return 0;  
+    }  
+  
+    // 根据对应小数是否相同来判断分数是否相同  
+    public boolean equals(Object obj) {  
+        Fraction f = (Fraction) obj;  
+        if (Math.abs((double) numerator / denominator - (double) f.numerator  
+                / f.denominator) < 0.00001)  
+            return true;  
+        return false;  
+    }  
+  
+    // 相同数值的分数返回相同的哈希码  
+    public int hashcode() {  
+        String str = String.valueOf((double) numerator / denominator);  
+        return str.hashCode();  
+    }  
+    
+    
+    
+	// 格式化字符信息输出  
+    public String toString() {  
+        // 如果为负分数，则将负号提前显示，分子和分母保留为正数，否则分子和分母皆取正数  
+        if (numerator * denominator < 0)  
+            return "-" + Math.abs(numerator) + "/" + Math.abs(denominator);  
+        else  
+            return Math.abs(numerator) + "/" + Math.abs(denominator);  
+    } 
+    
+    
+    
+    /*
+     * setters & getters
+     */
+    
+	public long getDenominator() {
+		return denominator;
+	}
+	public void setDenominator(long denominator) throws ArithmeticException {
+		if(denominator==0)
+			throw new  ArithmeticException("The denominator of the fraction cannot be zero!");
+		this.denominator = denominator;
+	}
+	public long getNumerator() {
+		return numerator;
+	}
+	public void setNumerator(long numerator) {
+		this.numerator = numerator;
+	}
+}

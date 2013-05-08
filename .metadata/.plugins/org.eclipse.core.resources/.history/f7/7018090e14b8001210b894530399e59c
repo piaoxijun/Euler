@@ -1,0 +1,118 @@
+package utils;
+
+import java.util.List;
+
+public class FractionForAdd  implements Comparable<FractionForAdd>{
+	
+	private long denominator;
+	private long numerator;
+	private long intNum=0;
+	
+	
+	public FractionForAdd(long numerator,long denominator,long intNum) throws ArithmeticException{
+		
+		setIntNum(intNum);
+		while(numerator-denominator>=0){
+			numerator = numerator-denominator;
+			intNum++;
+		}
+		setNumerator(numerator);
+		if(numerator==0){
+			denominator=1;
+		}
+		setDenominator(denominator);
+		reduct();
+	}
+
+
+    // 利用对应小数值是否相同来判断分数是否相同  
+    public boolean equals(FractionForAdd f) {  
+        if (numerator == f.numerator && denominator == f.denominator)  
+            return true;  
+        else  
+            return false;  
+    }  
+  
+    // 利用对应小数值的大小来判断分数的大小  
+    public boolean isGreater(FractionForAdd f) {  
+        if ((double) numerator / denominator > (double) f.numerator  
+                / f.denominator)  
+            return true;  
+        else  
+            return false;  
+    }  
+  
+    // 约分函数  
+    private void reduct() { 
+        // 求分子和分母的最小值  
+        long minValue = Math.min(Math.abs(numerator), Math.abs(denominator)); 
+        List<Long> primeNumberQueue = PrimeNumbers.getPrimeNumberListExceptOne();  
+        // 将小于分子和分母的最小值的数值，从大到小去除分子和分母，如果能够同时被整除，则以此数值约分并退出  
+        for (long i :primeNumberQueue) {
+        	minValue = Math.min(Math.abs(numerator), Math.abs(denominator)); 
+        	if(minValue<i){
+        		break;
+        	}
+            while (numerator % i == 0 && denominator % i == 0) {  
+            	numerator = numerator / i;  
+                denominator = denominator / i;                    
+            }  
+        } 
+    }  
+  
+    // 返回分数相加的结果，并且约分  
+    public FractionForAdd add(FractionForAdd f) {  
+         
+        long fractionNumerator = numerator * f.denominator + f.numerator  
+                * denominator;  
+        long fractionDenominator = denominator * f.denominator;  
+        
+        long fractionIntNum = intNum+f.getIntNum();
+//      System.out.println(fractionNumerator+":"+fractionDenominator);
+        return new FractionForAdd(fractionNumerator,fractionDenominator,fractionIntNum);  
+    }  
+
+    
+    
+    
+	// 格式化字符信息输出  
+    public String toString() {  
+        // 如果为负分数，则将负号提前显示，分子和分母保留为正数，否则分子和分母皆取正数  
+        if (numerator * denominator < 0)  
+            return "-" + Math.abs(numerator) + "/" + Math.abs(denominator);  
+        else  
+            return Math.abs(numerator) + "/" + Math.abs(denominator);  
+    } 
+    
+    
+    
+    /*
+     * setters & getters
+     */
+    
+	public long getDenominator() {
+		return denominator;
+	}
+	public void setDenominator(long denominator) throws ArithmeticException {
+		if(denominator==0)
+			throw new  ArithmeticException("The denominator of the fraction cannot be zero!");
+		this.denominator = denominator;
+	}
+	public long getNumerator() {
+		return numerator;
+	}
+	public void setNumerator(long numerator) {
+		this.numerator = numerator;
+	}
+
+
+	public long getIntNum() {
+		return intNum;
+	}
+
+
+	public void setIntNum(long intNum) {
+		this.intNum = intNum;
+	}
+	
+}

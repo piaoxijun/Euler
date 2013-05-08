@@ -1,0 +1,13 @@
+package c1.sc1;
+
+
+/**
+ * 一共有n种不同的coupons，每种coupons的概率相同。问期望多少次可以得到n种coupons，以代分数形式输出。
+ * @author jimmy
+ *
+ */
+public class P_1_1 {
+	public static void main(String[] args){
+		
+	}
+}

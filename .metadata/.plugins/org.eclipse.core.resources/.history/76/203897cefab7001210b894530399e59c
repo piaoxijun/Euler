@@ -1,0 +1,48 @@
+package c1.sc1;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import utils.Fraction;
+
+
+/**
+ * 一共有n种不同的coupons，每种coupons的概率相同。问期望多少次可以得到n种coupons，以带分数形式输出。
+ *  1<=n<=33
+ * @author jimmy
+ *
+ */
+public class P_1_1 {
+	
+	
+	public P_1_1(){
+		
+	}
+	private long couponStyleNumber =20; 
+	
+	Fraction getExpectedNextCouponStepLength(long noNeedStyleNumber) throws Exception{
+		if(couponStyleNumber-noNeedStyleNumber==0){
+			throw new Exception("The denominator of the fraction cannot be zero!");
+		}
+		return new Fraction(couponStyleNumber,couponStyleNumber-noNeedStyleNumber);
+	}
+	
+	String calExpetionForAllStepsForSelection() throws Exception{
+		Fraction result = new Fraction(0,1);
+		for(long i=couponStyleNumber;i>0;i--){
+			result.add(getExpectedNextCouponStepLength(i));
+		}
+		
+		return result.toString();
+	}
+	
+	
+	
+	
+	public static void main(String[] args){
+		
+	}
+	
+	
+	
+}

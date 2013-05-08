@@ -1,0 +1,21 @@
+package utils;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class PrimeNumbers {
+	
+	private static List<Long> primeNumberListExceptOne;
+	static{
+		primeNumberListExceptOne = new LinkedList<Long>();
+		primeNumberList.add(2l);
+		for(int i=2;i<100;i++){
+			for()
+		}
+	}
+	
+	
+	public static void  main(){
+		
+	}
+}

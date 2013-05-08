@@ -1,0 +1,83 @@
+package c1.sc1;
+
+import utils.Fraction;
+import utils.FractionWithNoReduction;
+
+
+/**
+ * 一共有n种不同的coupons，每种coupons的概率相同。问期望多少次可以得到n种coupons，以带分数形式输出。
+ *  1<=n<=33
+ * @author jimmy
+ *
+ */
+public class P_1_1 {
+	
+	
+	public P_1_1(long couponStyleNumber){
+		this.couponStyleNumber = couponStyleNumber;
+	}
+	
+	private long couponStyleNumber =20; 
+	private long bigDenominator =0;
+	
+	FractionWithNoReduction getExpectedNextCouponStepLength(long noNeedStyleNumber) throws Exception{
+		if(couponStyleNumber-noNeedStyleNumber==0){
+			throw new Exception("The denominator of the fraction cannot be zero!");
+		}
+		return new FractionWithNoReduction(couponStyleNumber,couponStyleNumber-noNeedStyleNumber);
+	}
+	
+	String calExpetionForAllStepsForSelection(boolean simMethod) throws Exception{
+		FractionWithNoReductions result = new FractionWithNoReduction(0,1);
+		if(simMethod){
+			for(long i=0;i<couponStyleNumber;i++){
+	//			System.out.print(i+"-"+getExpectedNextCouponStepLength(i)+":");
+				System.out.print(i+":");
+				result = result.add(getExpectedNextCouponStepLength(i));
+				System.out.println(result.toString());
+			}
+		}else{
+			for(long i=couponStyleNumber;i<couponStyleNumber;i++){
+	//			System.out.print(i+"-"+getExpectedNextCouponStepLength(i)+":");
+				System.out.print(i+":");
+				result = result.add(getExpectedNextCouponStepLength(i));
+				System.out.println(result.toString());
+			}
+		}
+		return result.toString();
+	}
+	
+	private FractionWithNoReduction getBigDenominatorFraction(Fraction f){
+		long mutiplyer = bigDenominator/f.getDenominator();
+		long numerator = f.getNumerator()*mutiplyer;
+		return new FractionWithNoReduction(numerator,bigDenominator);
+	}
+	
+	private long getProductForDenominator(){
+		if(bigDenominator!=0){
+			return bigDenominator;
+		}
+		long product=1;
+
+		for(int i=2;i<=couponStyleNumber;i++){
+			product*=i;
+		}
+		bigDenominator = product;
+		return product;
+	}
+	
+	
+	public static void main(String[] args) throws Exception{
+//		long product=1;
+//
+//		for(int i=1;i<34;i++){
+//			product*=i;
+//		}
+//		System.out.println(product);
+		P_1_1 p1= new P_1_1(23);
+		System.out.println("finalResult:"+p1.calExpetionForAllStepsForSelection());
+	}
+	
+	
+	
+}

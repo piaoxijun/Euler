@@ -1,0 +1,39 @@
+package utils;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class PrimeNumbers {
+	
+	private static List<Long> primeNumberListExceptOne;
+	
+	private static long calNumber;
+	static{
+		primeNumberListExceptOne = new LinkedList<Long>();
+		primeNumberListExceptOne.add(2l);
+		boolean tempBoolean = true;
+		for(long i=3;i<100;i++){
+			tempBoolean = true;
+			for(long tempPrime:primeNumberListExceptOne){
+				if(i%tempPrime==0){
+					tempBoolean = false;
+					break;
+				}
+			}
+			if(tempBoolean){
+				primeNumberListExceptOne.add(i);
+			}
+		}
+	}
+	
+	
+	getPrimeNumberList(long toNumber){
+		
+	}
+	
+	public static void  main(String args[]){
+		for(long temp:primeNumberListExceptOne){
+			System.out.println(temp);
+		}
+	}
+}

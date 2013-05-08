@@ -1,0 +1,16 @@
+package utils;
+
+public class CommonMultiple {
+
+	
+	33     /**
+	34      * @param a,b
+	35      * @return
+	36      * 求两个数的最小公倍数
+	37      */
+	38     public int gongBei(int a,int b){
+	39         int gb = 0;
+	40         gb = a*b/gongYue(a,b);
+	41         return gb;
+	42     }
+}

@@ -1,0 +1,19 @@
+package utils;
+
+public class CommonMultiple {
+
+	
+	 /**
+	  * @param a,b
+	  * @return
+	  * 求两个数的最小公倍数
+	  */
+	 public long gongBei(long a,long b){
+	     long gb = 0;
+	     gb = a*b/CommonDivisor.getMaxCommonDivisor(a,b);
+	     return gb;
+	 }
+	     
+	     
+	     
+}

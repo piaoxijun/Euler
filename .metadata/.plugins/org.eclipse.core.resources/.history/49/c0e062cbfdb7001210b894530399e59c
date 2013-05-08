@@ -1,0 +1,17 @@
+package utils;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class PrimeNumbers {
+	
+	private static List<Long> primeNumberList;
+	static{
+		primeNumberList = new LinkedList<Long>();
+	}
+	
+	
+	public static void  main(){
+		
+	}
+}
